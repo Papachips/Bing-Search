@@ -5,27 +5,47 @@ import os
 
 def pcSearches(searchTerms, url):
 	items = len(searchTerms) - 1
-	count = 0
+	googleCount = 0
+	edgeCount = 0
 
-	while count < 31:
+	clear = lambda: os.system('cls')
+
+	print('Opening browsers...')
+	webbrowser.get('C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s').open('https://www.bing.com')
+	webbrowser.get('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe %s').open('https://www.bing.com')
+	time.sleep(3)
+
+	while googleCount < 35:
 		index = random.randint(0,items)
 		cooldown = random.randint(6, 19)
 		webbrowser.get('C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s').open(pcURL + searchTerms[index].lower())
-		count += 1
-		print('Search ' + str(count) + ' of 30 completed.')
+		googleCount += 1
+		print('Chrome search ' + str(googleCount) + ' of 35 completed.')
 		time.sleep(cooldown)
 
-	print('Searches completed. Closing all Chrome tabs and directing to Microsoft Rewards page.')
-	time.sleep(1)
+	print('Chrome searches completed. Closing all Chrome tabs and starting Edge searches...')
+	time.sleep(3)
 	os.system('taskkill /im chrome.exe /f')
+	clear()
 
+	while edgeCount < 7:
+		index = random.randint(0,items)
+		cooldown = random.randint(6,19)
+		webbrowser.get('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe %s').open(pcURL + searchTerms[index].lower())
+		edgeCount += 1
+		print('Edge search ' + str(edgeCount) + ' of 7 completed.')
+		time.sleep(cooldown)
+
+	print('Edge searches completed. Closing all Edge tabs and redirecting to Microsoft Rewards page.')
+	time.sleep(3)
+	os.system('taskkill /im msedge.exe /f')
+	clear()
 	webbrowser.get('C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s').open('https://account.microsoft.com/rewards/pointsbreakdown')
-	return
-
-
+	print('Bing searching done bruh!')
 
 pcURL = 'https://www.bing.com/search?q='
 
+#Search terms
 searchTerms=['San Francisco 49ers',
 'Chicago Bears',
 'Cincinnati Bengals',
